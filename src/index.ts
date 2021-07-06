@@ -3,6 +3,9 @@ import { ToolbarButtonLocation } from 'api/types';
 
 joplin.plugins.register({
 	onStart: async function () {
+		const homeNoteId = localStorage.getItem('homeNoteId');
+		if (homeNoteId) { joplin.commands.execute('openNote', homeNoteId) }
+
 		joplin.commands.register({
 			name: 'setHomenote',
 			label: 'open this note on each startup',
@@ -14,8 +17,6 @@ joplin.plugins.register({
 			})
 		})
 		joplin.views.toolbarButtons.create('idHomenote', 'setHomenote', ToolbarButtonLocation.EditorToolbar);
-
-		const homeNoteId = localStorage.getItem('homeNoteId');
-		if (homeNoteId) { joplin.commands.execute('openNote', homeNoteId) }
+			
 	},
 });
