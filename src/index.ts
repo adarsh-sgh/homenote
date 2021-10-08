@@ -5,10 +5,10 @@ joplin.plugins.register({
   onStart: async function () {
     const homeNoteId = localStorage.getItem("homeNoteId");
     if (homeNoteId) {
-      joplin.commands.execute("openNote", homeNoteId);
+      await joplin.commands.execute("openNote", homeNoteId);
     }
 
-    joplin.commands.register({
+    await joplin.commands.register({
       name: "setHomenote",
       label: "open this note on each startup",
       iconName: "fas fa-home",
@@ -23,7 +23,7 @@ joplin.plugins.register({
           resolve(1);
         }),
     });
-    joplin.views.toolbarButtons.create(
+    await joplin.views.toolbarButtons.create(
       "idHomenote",
       "setHomenote",
       ToolbarButtonLocation.EditorToolbar
