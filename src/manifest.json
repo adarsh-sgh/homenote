@@ -6,7 +6,7 @@
 	"name": "Home Note",
 	"description": "Plugin to open a choosen note each time joplin starts. It is like homepages on browsers.",
 	"author": "Adarsh Singh(lki)",
-	"homepage_url": "https://github.com/lkiThakur/homenote#readme",
-	"repository_url": "https://github.com/lkiThakur/homenote",
+	"homepage_url": "https://github.com/adarsh-sgh/homenote#readme",
+	"repository_url": "https://github.com/adarsh-sgh/homenote",
 	"keywords": ["homenote","homepage","default-page"]
 }
