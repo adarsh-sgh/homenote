@@ -21,6 +21,23 @@ joplin.plugins.register({
 				}),
 		});
 		await joplin.commands.register({
+			name: "openElseSetHomenote",
+			label: "open or set as Homenote",
+			iconName: "fas fa-home",
+			execute: () =>
+				new Promise((resolve, reject) => {
+					if (localStorage.getItem("homeNoteId")) {
+						joplin.commands.execute("openHomenote");
+						return;
+					}
+					joplin.views.dialogs.setHtml(
+						regiteredHomenoteDialog,
+						`<p>Homenote Set. <br/> Go to tools → set as Homenote to change Homenote</p>`
+					);
+					joplin.commands.execute("setHomenote");
+				}),
+		});
+		await joplin.commands.register({
 			name: "openHomenote",
 			label: "Open the Homenote",
 			iconName: "fas fa-home",
@@ -40,7 +57,7 @@ joplin.plugins.register({
 			await joplin.commands.execute("openHomenote");
 		await joplin.views.toolbarButtons.create(
 			"idHomenote",
-			"setHomenote",
+			"openElseSetHomenote",
 			ToolbarButtonLocation.EditorToolbar
 		);
 
