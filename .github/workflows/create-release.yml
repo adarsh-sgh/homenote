@@ -1,0 +1,23 @@
+name: Automatic Release
+
+on:
+  # When a change is pushed to package.json in main branch
+  push:
+    branches: ['master']
+    paths: ['package.json']
+  # Manual run
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Required to access package.json
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Update Release
+        uses: aynp/node-automatic-release@v1.2.0
+        with:
+          draft_release: false
+          generate_release_notes: true
