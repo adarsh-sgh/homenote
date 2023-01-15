@@ -1,9 +1,10 @@
 # Joplin Plugin : HomeNote
 Allows user to set a homenote which will be automatically opened each time joplin is launched. 
 
-To set a note as homenote open that note and then click the home icon on editor toolbar (<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>H </kbd> ). 
+To set a note as homenote use (<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>H </kbd> ) or `Tools > set as homenote`. 
 
-Use <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>H </kbd> to jump to Homenote; you can also find these options under `Tools` menu.
+Use <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>H </kbd> or click the home icon on editor toolbar to jump to Homenote; you can also find these options under `Tools` menu.
+
 
 ![image](https://user-images.githubusercontent.com/63918341/124692363-1b3be600-defb-11eb-9bfa-84d373b4a6cb.png)
 
