@@ -1,4 +1,6 @@
 # Joplin Plugin : HomeNote
+[![Node.js CI](https://github.com/adarsh-sgh/homenote/actions/workflows/runTests.js.yml/badge.svg)](https://github.com/adarsh-sgh/homenote/actions/workflows/runTests.js.yml)
+
 Allows user to set a homenote which will be automatically opened each time joplin is launched. 
 
 To set a note as homenote use (<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>H </kbd> ) or `Tools > set as homenote`. 
