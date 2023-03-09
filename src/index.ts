@@ -15,7 +15,7 @@ joplin.plugins.register({
 							localStorage.setItem("homeNoteId", currentNote.id)
 						)
 						.then(async d => {
-							joplin.views.dialogs.open(regiteredHomenoteDialog);
+							joplin.views.dialogs.open(registeredHomenoteDialog);
 						});
 					resolve(1);
 				}),
@@ -31,7 +31,7 @@ joplin.plugins.register({
 						return;
 					}
 					joplin.views.dialogs.setHtml(
-						regiteredHomenoteDialog,
+						registeredHomenoteDialog,
 						`<p>Homenote Set. <br/> Go to tools → set as Homenote to change Homenote</p>`
 					);
 					joplin.commands.execute("setHomenote");
@@ -61,14 +61,14 @@ joplin.plugins.register({
 			ToolbarButtonLocation.EditorToolbar
 		);
 
-		const regiteredHomenoteDialog = await joplin.views.dialogs.create(
+		const registeredHomenoteDialog = await joplin.views.dialogs.create(
 			"homenoteRegistered"
 		);
 		await joplin.views.dialogs.setHtml(
-			regiteredHomenoteDialog,
+			registeredHomenoteDialog,
 			`<p>Current note selected as Homenote</p>`
 		);
-		await joplin.views.dialogs.setButtons(regiteredHomenoteDialog, [
+		await joplin.views.dialogs.setButtons(registeredHomenoteDialog, [
 			{
 				id: "ok",
 			},
