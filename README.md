@@ -24,3 +24,15 @@ To restore the default behaviour of opening the last note when joplin is launche
 2. Press <kbd>Ctrl</kbd><kbd>,</kbd> 
 3. Select Plugins from left pane
 4. disable Home Note plugin by clicking on the toggle button in front of the plugin name
+
+# Local Setup (For developers)
+After cloning the repository, run the following commands to build the plugin:
+```bash
+export NODE_OPTIONS=--openssl-legacy-provider
+npm install
+npm run dist
+```
+
+Add the full path to homenote/dist folder in joplin as shown in [joplin docs](https://joplinapp.org/help/api/get_started/plugins/)
+
+mail me at adarsh.sgh3@gmail.com for any queries or suggestions
