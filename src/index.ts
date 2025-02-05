@@ -18,15 +18,19 @@ joplin.plugins.register({
 			name: "setHomenote",
 			label: "Set as Homenote",
 			iconName: "fas fa-home",
-			execute: () =>
-				new Promise(async (resolve, reject) => {
+			execute: async () => {
+				try {
 					const selectedNote = await joplin.workspace.selectedNote();
 					if (selectedNote) {
 						await joplin.settings.setValue("homeNoteId", selectedNote.id);
 						await joplin.views.dialogs.open(registeredHomenoteDialog);
+					} else {
+						console.error("No note selected");
 					}
-					resolve(1);
-				}),
+				} catch (error) {
+					console.error("Error setting home note:", error);
+				}
+			},
 		});
 		await joplin.commands.register({
 			name: "openElseSetHomenote",
@@ -50,7 +54,7 @@ joplin.plugins.register({
 			label: "Open the Homenote",
 			iconName: "fas fa-home",
 			execute: async () => {
-				const homeNoteId = await joplin.settings.values("homeNoteId");
+				const homeNoteId = getHomeNoteId();
 				try {
 					await joplin.commands.execute("openNote", homeNoteId);
 				} catch (error) {
@@ -66,6 +70,18 @@ joplin.plugins.register({
 			"idHomenote",
 			"openElseSetHomenote",
 			ToolbarButtonLocation.EditorToolbar
+		);
+
+		await joplin.views.toolbarButtons.create(
+			"idHomenote",
+			"openHomenote",
+			ToolbarButtonLocation.NoteToolbar
+		);
+
+		await joplin.views.toolbarButtons.create(
+			"setHomenote",
+			"setHomenote",
+			ToolbarButtonLocation.NoteToolbar
 		);
 
 		const registeredHomenoteDialog = await joplin.views.dialogs.create(
