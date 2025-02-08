@@ -14,6 +14,10 @@ joplin.plugins.register({
 			},
 		});
 
+		const registeredHomenoteDialog = await joplin.views.dialogs.create(
+			"homenoteRegistered"
+		);
+
 		await joplin.commands.register({
 			name: "setHomenote",
 			label: "Set as Homenote",
@@ -23,6 +27,10 @@ joplin.plugins.register({
 					const selectedNote = await joplin.workspace.selectedNote();
 					if (selectedNote) {
 						await joplin.settings.setValue("homeNoteId", selectedNote.id);
+						await joplin.views.dialogs.setHtml(
+							registeredHomenoteDialog,
+							`<p>Homenote Set. <br/> Go to tools → set as Homenote to change Homenote</p>`
+						);
 						await joplin.views.dialogs.open(registeredHomenoteDialog);
 					} else {
 						console.error("No note selected");
@@ -42,10 +50,6 @@ joplin.plugins.register({
 					await joplin.commands.execute("openHomenote");
 					return;
 				}
-				await joplin.views.dialogs.setHtml(
-					registeredHomenoteDialog,
-					`<p>Homenote Set. <br/> Go to tools → set as Homenote to change Homenote</p>`
-				);
 				await joplin.commands.execute("setHomenote");
 			},
 		});
@@ -54,7 +58,7 @@ joplin.plugins.register({
 			label: "Open the Homenote",
 			iconName: "fas fa-home",
 			execute: async () => {
-				const homeNoteId = getHomeNoteId();
+				const homeNoteId = await getHomeNoteId();
 				try {
 					await joplin.commands.execute("openNote", homeNoteId);
 				} catch (error) {
@@ -84,9 +88,6 @@ joplin.plugins.register({
 			ToolbarButtonLocation.NoteToolbar
 		);
 
-		const registeredHomenoteDialog = await joplin.views.dialogs.create(
-			"homenoteRegistered"
-		);
 		await joplin.views.dialogs.setHtml(
 			registeredHomenoteDialog,
 			`<p>Current note selected as Homenote</p>`
