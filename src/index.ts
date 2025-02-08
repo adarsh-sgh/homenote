@@ -20,7 +20,7 @@ joplin.plugins.register({
 
 		await joplin.commands.register({
 			name: "setHomenote",
-			label: "Set as Homenote",
+			label: "Set as HomeNote",
 			iconName: "fas fa-star",
 			execute: async () => {
 				try {
@@ -55,7 +55,7 @@ joplin.plugins.register({
 		});
 		await joplin.commands.register({
 			name: "openHomenote",
-			label: "Open the Homenote",
+			label: "Open HomeNote",
 			iconName: "fas fa-home",
 			execute: async () => {
 				const homeNoteId = await getHomeNoteId();
