@@ -21,7 +21,7 @@ joplin.plugins.register({
 		await joplin.commands.register({
 			name: "setHomenote",
 			label: "Set as Homenote",
-			iconName: "fas fa-home",
+			iconName: "fas fa-star",
 			execute: async () => {
 				try {
 					const selectedNote = await joplin.workspace.selectedNote();
@@ -42,7 +42,7 @@ joplin.plugins.register({
 		});
 		await joplin.commands.register({
 			name: "openElseSetHomenote",
-			label: "open or set as Homenote",
+			label: "Open or set as HomeNote",
 			iconName: "fas fa-home",
 			execute: async () => {
 				const homeNoteId = await getHomeNoteId();
@@ -75,14 +75,16 @@ joplin.plugins.register({
 			"openElseSetHomenote",
 			ToolbarButtonLocation.EditorToolbar
 		);
+
 		const isMobilePlatform = await isMobile();
-		if(isMobilePlatform){
-			await joplin.views.toolbarButtons.create(
-				"openHomenoteId",
-				"openHomenote",
-				ToolbarButtonLocation.NoteToolbar
-			);
-		}	
+    if (isMobilePlatform) {
+			console.log({isMobilePlatform})
+      await joplin.views.toolbarButtons.create(
+        "openHomenoteId",
+        "openHomenote",
+        ToolbarButtonLocation.NoteToolbar
+      );
+    }	
 
 		await joplin.views.toolbarButtons.create(
 			"setHomenoteId",
@@ -123,6 +125,11 @@ async function getHomeNoteId():Promise<string | undefined>{
 }
 
 const isMobile = async () => {
-	const version = await joplin.versionInfo?.();
-	return version?.platform === 'mobile';
+	try {
+    const version = await joplin?.versionInfo?.();
+    return version?.platform === "mobile";
+  } finally {
+		// default to mobile
+    return true;
+  }
 };
