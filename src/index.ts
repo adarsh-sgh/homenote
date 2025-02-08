@@ -75,15 +75,17 @@ joplin.plugins.register({
 			"openElseSetHomenote",
 			ToolbarButtonLocation.EditorToolbar
 		);
+		const isMobilePlatform = await isMobile();
+		if(isMobilePlatform){
+			await joplin.views.toolbarButtons.create(
+				"openHomenoteId",
+				"openHomenote",
+				ToolbarButtonLocation.NoteToolbar
+			);
+		}	
 
 		await joplin.views.toolbarButtons.create(
-			"idHomenote",
-			"openHomenote",
-			ToolbarButtonLocation.NoteToolbar
-		);
-
-		await joplin.views.toolbarButtons.create(
-			"setHomenote",
+			"setHomenoteId",
 			"setHomenote",
 			ToolbarButtonLocation.NoteToolbar
 		);
@@ -92,6 +94,7 @@ joplin.plugins.register({
 			registeredHomenoteDialog,
 			`<p>Current note selected as Homenote</p>`
 		);
+
 		await joplin.views.dialogs.setButtons(registeredHomenoteDialog, [
 			{
 				id: "ok",
@@ -118,3 +121,8 @@ async function getHomeNoteId():Promise<string | undefined>{
 	console.log(homeNoteId);
 	return homeNoteId.homeNoteId as string;
 }
+
+const isMobile = async () => {
+	const version = await joplin.versionInfo?.();
+	return version?.platform === 'mobile';
+};
