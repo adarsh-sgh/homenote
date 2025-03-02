@@ -1,5 +1,5 @@
 import joplin from "api";
-import { MenuItemLocation, ToolbarButtonLocation } from "api/types";
+import { MenuItemLocation, SettingItemType, ToolbarButtonLocation } from "api/types";
 
 joplin.plugins.register({
 	onStart: async function () {
@@ -7,9 +7,8 @@ joplin.plugins.register({
 		await joplin.settings.registerSettings({
 			homeNoteId: {
 				value: '',
-				type: 2, // String type
-				section: 'myPluginSection',
-				public: true,
+				type: SettingItemType.String, 
+				public: false,
 				label: 'Home Note ID',
 			},
 		});
