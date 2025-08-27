@@ -12,7 +12,9 @@ joplin.plugins.register({
 				label: 'Home Note ID',
 			},
 		});
-
+		//todo: hack to counteract a joplin issue where focus remains on setHomenote button despite dialog is opened
+		// https://discourse.joplinapp.org/t/home-note-open-a-choosen-note-each-time-joplin-starts-it-is-like-homepages-on-browsers/43704/2
+		let dialogOpen = false;
 		const registeredHomenoteDialog = await joplin.views.dialogs.create(
 			"homenoteRegistered"
 		);
@@ -22,6 +24,7 @@ joplin.plugins.register({
 			label: "Set as HomeNote",
 			iconName: "fas fa-star",
 			execute: async () => {
+				if (dialogOpen) return;
 				try {
 					const selectedNote = await joplin.workspace.selectedNote();
 					if (selectedNote) {
@@ -30,7 +33,11 @@ joplin.plugins.register({
 							registeredHomenoteDialog,
 							`<p>Homenote Set. <br/> Go to tools → set as Homenote to change Homenote</p>`
 						);
+						dialogOpen = true;
 						await joplin.views.dialogs.open(registeredHomenoteDialog);
+						setTimeout(() => {
+							dialogOpen = false;
+						}, 1000);
 					} else {
 						console.error("No note selected");
 					}
@@ -91,10 +98,6 @@ joplin.plugins.register({
 			ToolbarButtonLocation.NoteToolbar
 		);
 
-		await joplin.views.dialogs.setHtml(
-			registeredHomenoteDialog,
-			`<p>Current note selected as Homenote</p>`
-		);
 
 		await joplin.views.dialogs.setButtons(registeredHomenoteDialog, [
 			{
