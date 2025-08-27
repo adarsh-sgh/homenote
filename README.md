@@ -44,5 +44,3 @@ if using fish shell use the following command to set NODE_OPTIONS
 set -x NODE_OPTIONS --openssl-legacy-provider
 ```
 Add the full path to homenote/dist folder in joplin as shown in [joplin docs](https://joplinapp.org/help/api/get_started/plugins/)
-
-mail me at adarsh.sgh3@gmail.com for any queries or suggestions
